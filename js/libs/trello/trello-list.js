@@ -10,15 +10,26 @@ The API development board is at https://trello.com/api
 The &dummy=.js part of the managed resource URL is required per http://doc.jsfiddle.net/basic/introduction.html#add-resources
 */
 var boardId = "51510e779c649e70160045e2";
-var boardFields = function (boardId) {
-        var myboard = Trello.boards.get(boardId);
-        $.parseJSON(myboard.responseText);
-        };
-var boardLists = $("<div>")
-            .text("Loading Lists for Board" + boardFields.name + "...")
+var myboard = Trello.boards.get(boardId);
+var boardFields = $.parseJSON(myboard.responseText);
+var mylists = Trello.get("boards/" + boardId + "/lists");
+var listData =  $.parseJSON(mylists.responseText);
+
+var pageHeadingBoard = $("<div>")
+            .text("Loading Lists for Board " + boardFields.name + "...")
             .appendTo("#output");
-boardLists;
-//         Trello.get("board/" + board_id + "/lists", function (lists) {
+
+function doneFilter(element, index, array) {
+  return element.name.match("Done");
+  }
+  
+function listDone() {
+  mylist = listData.filter(doneFilter);
+  return mylist[0].id;
+  }
+  
+  listDone();
+//        Trello.get("boards/" + id + "/lists", function (lists) {
 //             $lists.empty();
 //             //$("<div>").text("Click a list to...").appendTo($lists);
 // 
@@ -38,4 +49,5 @@ boardLists;
 //                 });
 // 
 //             });
-//         });
+        });
+};
