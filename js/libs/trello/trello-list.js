@@ -12,32 +12,31 @@ The &dummy=.js part of the managed resource URL is required per http://doc.jsfid
 var board_id = "51510e779c649e70160045e2";
 var boardLists = function (board_id) {
 
-    Trello.members.get("me", function (member) {
         var $board = Trello.boards.get(board_id)
+        var $boardflds = $.parseJSON($board.responseText);
         var $lists = $("<div>")
-            .text("Loading Lists for Board" + $board.fields.name + "...")
+            .text("Loading Lists for Board" + $boardflds.name + "...")
             .appendTo("#output");
 
-        Trello.get("board/" + board_id + "/lists", function (lists) {
-            $lists.empty();
-            //$("<div>").text("Click a list to...").appendTo($lists);
-
-            $.each(lists, function (ix, list) {
-                $("<div>")
-                    .addClass(list.id)
-                    .addClass("list")
-                    .text(list.name + " ( " + list.id + " )")
-                    .appendTo($lists)
-                Trello.get("list/" + list.id + "/cards", function (list_cards) {
-                    $list_cards.empty();
-                    $.each(list_cards, function (ix, list_card) {
-                        $("<li>")
-                            .text(list_card.name)
-                            .appendTo($list_cards)
-                    });
-                });
-
-            });
-        });
-    });
+//         Trello.get("board/" + board_id + "/lists", function (lists) {
+//             $lists.empty();
+//             //$("<div>").text("Click a list to...").appendTo($lists);
+// 
+//             $.each(lists, function (ix, list) {
+//                 $("<div>")
+//                     .addClass(list.id)
+//                     .addClass("list")
+//                     .text(list.name + " ( " + list.id + " )")
+//                     .appendTo($lists)
+//                 Trello.get("list/" + list.id + "/cards", function (list_cards) {
+//                     $list_cards.empty();
+//                     $.each(list_cards, function (ix, list_card) {
+//                         $("<li>")
+//                             .text(list_card.name)
+//                             .appendTo($list_cards)
+//                     });
+//                 });
+// 
+//             });
+//         });
   };
