@@ -17,7 +17,6 @@ var boardFields = function (boardId) {
 var boardLists = $("<div>")
             .text("Loading Lists for Board" + boardFields.name + "...")
             .appendTo("#output");
-        };
 boardLists;
 //         Trello.get("board/" + board_id + "/lists", function (lists) {
 //             $lists.empty();
