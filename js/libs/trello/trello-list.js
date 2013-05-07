@@ -11,13 +11,13 @@ The &dummy=.js part of the managed resource URL is required per http://doc.jsfid
 */
 var board_id = "51510e779c649e70160045e2";
 var boardLists = function (board_id) {
-
-        var $board = Trello.boards.get(board_id)
-        var $boardflds = $.parseJSON($board.responseText);
-        var $lists = $("<div>")
-            .text("Loading Lists for Board" + $boardflds.name + "...")
+        var myboard = Trello.boards.get(board_id);
+        var myboardflds = $.parseJSON(myboard.responseText);
+        var mylists = $("<div>")
+            .text("Loading Lists for Board" + myboardflds.name + "...")
             .appendTo("#output");
-
+        };
+boardLists;
 //         Trello.get("board/" + board_id + "/lists", function (lists) {
 //             $lists.empty();
 //             //$("<div>").text("Click a list to...").appendTo($lists);
@@ -39,4 +39,3 @@ var boardLists = function (board_id) {
 // 
 //             });
 //         });
-  };
